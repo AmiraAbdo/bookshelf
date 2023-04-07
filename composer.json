@@ -11,5 +11,7 @@
             "email": "rania.weiss@stu.ibu.edu.ba"
         }
     ],
-    "require": {}
+    "require": {
+        "mikecao/flight": "^2.0"
+    }
 }
