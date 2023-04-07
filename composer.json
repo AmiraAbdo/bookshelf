@@ -1,0 +1,17 @@
+{
+    "name": "rani/bookshelf",
+    "autoload": {
+        "psr-4": {
+            "Rani\\Bookshelf\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "rania-w",
+            "email": "rania.weiss@stu.ibu.edu.ba"
+        }
+    ],
+    "require": {
+        "mikecao/flight": "^2.0"
+    }
+}
