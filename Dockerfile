@@ -19,3 +19,4 @@ COPY composer.json composer.json
 RUN composer install --no-dev
 
 EXPOSE 80
+EXPOSE 443
