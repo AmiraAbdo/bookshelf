@@ -10,7 +10,7 @@ $servername = getenv('SERVERNAME');
 $username = getenv('USERNAME');
 $password = getenv('PASSWORD');
 $schema = getenv('SCHEMA');
-$port = getenv('PORT');
+$port = 25060;
 $conn = new PDO("mysql:host=$servername;dbname=$schema;port=$port", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 Flight::set("connection", $conn);
