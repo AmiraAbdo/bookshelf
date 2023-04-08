@@ -6,11 +6,11 @@ error_reporting(E_ALL);
 
 require './vendor/autoload.php';
 
-$servername = "";
-$username = "";
-$password = "";
-$schema = "";
-$port = "";
+$servername = getenv('SERVERNAME');
+$username = getenv('USERNAME');
+$password = getenv('PASSWORD');
+$schema = getenv('SCHEMA');
+$port = getenv('PORT');
 $conn = new PDO("mysql:host=$servername;dbname=$schema;port=$port", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 Flight::set("connection", $conn);
