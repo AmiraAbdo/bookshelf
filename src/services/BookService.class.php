@@ -15,7 +15,8 @@ class BookService extends BaseService
         parent::__construct(new BookDao());
     }
 
-    public function getByISBN($isbn){
+    public function getByISBN($isbn)
+    {
         return $this->dao->getByISBN($isbn);
     }
 }
