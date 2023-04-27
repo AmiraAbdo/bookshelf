@@ -20,12 +20,6 @@ Flight::route('/rani', function () {
 Flight::register('baseService', 'BaseService');
 Flight::register('bookService', 'BookService');
 
-Flight::route('GET /book/@id', function ($id) {
-    $stmt = Flight::get("connection")->prepare("SELECT * FROM book WHERE book_id = :id;");
-    $stmt->execute(['id' => $id]);
-    Flight::json($stmt->fetchAll(PDO::FETCH_ASSOC));
-});
-
 Flight::route('GET /bookshelf', function () {
     $stmt = Flight::get("connection")->prepare("SELECT * FROM book;");
     $stmt->execute();

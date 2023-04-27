@@ -7,3 +7,7 @@ error_reporting(E_ALL);
 Flight::route('GET /book', function(){
     Flight::json(Flight::bookService()->getAll());
 });
+
+Flight::route('GET /book/@id', function($id){
+    Flight::json(Flight::bookService()->getById($id));
+});
