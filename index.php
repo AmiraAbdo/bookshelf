@@ -5,16 +5,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require './vendor/autoload.php';
-
-$servername = getenv('SERVERNAME');
-$username = getenv('USERNAME');
-$password = getenv('PASSWORD');
-$schema = getenv('SCHEMA');
-$port = 25060;
-$conn = new PDO("mysql:host=$servername;dbname=$schema;port=$port", $username, $password);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-Flight::set("connection", $conn);
+require_once './vendor/autoload.php';
+require_once './src/services/BaseService.class.php';
+require_once './src/services/BookService.class.php';
 
 Flight::route('/', function () {
     echo 'hello world!';
@@ -24,15 +17,12 @@ Flight::route('/rani', function () {
     echo 'hello world Rani!';
 });
 
-Flight::route('GET /book', function () {
-    $stmt = Flight::get("connection")->prepare("SELECT * FROM book;");
-    $stmt->execute();
-    Flight::json($stmt->fetchAll(PDO::FETCH_ASSOC));
-});
+Flight::register('baseService', 'BaseService');
+Flight::register('bookService', 'BookService');
 
 Flight::route('GET /book/@id', function ($id) {
     $stmt = Flight::get("connection")->prepare("SELECT * FROM book WHERE book_id = :id;");
-    $stmt->execute(['id'=>$id]);
+    $stmt->execute(['id' => $id]);
     Flight::json($stmt->fetchAll(PDO::FETCH_ASSOC));
 });
 
@@ -47,5 +37,7 @@ Flight::route('GET /user', function () {
     $stmt->execute();
     Flight::json($stmt->fetchAll(PDO::FETCH_ASSOC));
 });
+
+require_once __DIR__ . '/src/routes/BookRoutes.php';
 
 Flight::start();
