@@ -28,10 +28,24 @@ class BaseDao
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getById($id){
+    public function getById($id)
+    {
         $stmt = $this->conn->prepare("SELECT * FROM " . $this->table . " WHERE " . $this->table . "_id = :id");
-        $stmt->execute(['id'=>$id]);
+        $stmt->execute(['id' => $id]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return reset($result); //first element of array
+    }
+
+    public function queryNoParams($query)
+    {
+        $stmt = $this->conn->query($query);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function queryParams($query, $params)
+    {
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

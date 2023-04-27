@@ -11,3 +11,7 @@ Flight::route('GET /book', function(){
 Flight::route('GET /book/@id', function($id){
     Flight::json(Flight::bookService()->getById($id));
 });
+
+Flight::route('GET /book/isbn/@isbn', function($isbn){
+    Flight::json(Flight::bookService()->getByISBN($isbn));
+});

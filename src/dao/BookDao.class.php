@@ -7,9 +7,14 @@ error_reporting(E_ALL);
 require_once dirname(__FILE__)."/BaseDao.class.php";
 
 class BookDao extends BaseDao{
+    
 
     public function __construct()
     {
         parent::__construct('book');
+    }
+
+    public function getByISBN($isbn){
+        return $this->queryParams("SELECT * FROM book WHERE ISBN = :isbn", ["isbn"=>$isbn]);
     }
 }
