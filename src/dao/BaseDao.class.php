@@ -11,10 +11,10 @@ class BaseDao
 
     public function __construct($table)
     {
-        $servername = getenv('SERVERNAME');
-        $username = getenv('USERNAME');
-        $password = getenv('PASSWORD');
-        $schema = getenv('SCHEMA');
+        $servername = getenv('BOOKSHELF_SERVERNAME');
+        $username = getenv('BOOKSHELF_USERNAME');
+        $password = getenv('BOOKSHELF_PASSWORD');
+        $schema = getenv('BOOKSHELF_SCHEMA');
         $port = 25060;
 
         $this->conn = new PDO("mysql:host=$servername;dbname=$schema;port=$port", $username, $password);
@@ -48,5 +48,27 @@ class BaseDao
         $stmt = $this->conn->prepare($query);
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function add($data)
+    {
+        {
+            $query = "INSERT INTO " . $this->table . " (";
+            foreach ($data as $column => $value) {
+                $query .= $column . ", ";
+            }
+            $query = substr($query, 0, -2);
+            $query .= ") VALUES (";
+            foreach ($data as $column => $value) {
+                $query .= ":" . $column . ", ";
+            }
+            $query = substr($query, 0, -2);
+            $query .= ")";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute($data); // sql injection prevention
+            $data['id'] = $this->conn->lastInsertId();
+            return $data;
+        }
     }
 }
