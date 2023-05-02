@@ -21,4 +21,9 @@ class BaseService
     {
         return $this->dao->getById($id);
     }
+
+    public function add($data)
+    {
+        return $this->dao->add($data);
+    }
 }
