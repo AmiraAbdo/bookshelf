@@ -49,4 +49,26 @@ class BaseDao
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function add($data)
+    {
+        {
+            $query = "INSERT INTO " . $this->table . " (";
+            foreach ($data as $column => $value) {
+                $query .= $column . ", ";
+            }
+            $query = substr($query, 0, -2);
+            $query .= ") VALUES (";
+            foreach ($data as $column => $value) {
+                $query .= ":" . $column . ", ";
+            }
+            $query = substr($query, 0, -2);
+            $query .= ")";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute($data); // sql injection prevention
+            $data['id'] = $this->conn->lastInsertId();
+            return $data;
+        }
+    }
 }

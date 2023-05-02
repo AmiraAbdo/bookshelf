@@ -19,4 +19,9 @@ class BookService extends BaseService
     {
         return $this->dao->getByISBN($isbn);
     }
+
+    public function search($params)
+    {
+        return $this->dao->search($params);
+    }
 }
