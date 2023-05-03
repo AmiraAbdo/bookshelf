@@ -31,7 +31,7 @@ class BaseDao
 
     public function getById($id)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM " . $this->table . " WHERE " . $this->table . "_id = :id");
+        $stmt = $this->conn->prepare("SELECT * FROM " . $this->table . " WHERE id" . $this->table . " = :id");
         $stmt->execute(['id' => $id]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return reset($result); //first element of array
