@@ -26,4 +26,14 @@ class BaseService
     {
         return $this->dao->add($data);
     }
+
+    public function update($id, $data)
+    {
+        return $this->dao->update($id, $data);
+    }
+
+    public function delete($id)
+    {
+        return $this->dao->delete($id);
+    }
 }
