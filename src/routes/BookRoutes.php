@@ -9,7 +9,11 @@ Flight::route('GET /book', function () {
 });
 
 Flight::route('GET /book/@id', function ($id) {
-    Flight::json(Flight::bookService()->getById($id));
+    if (Flight::bookService()->getById($id) != null) {
+        Flight::json(Flight::bookService()->getById($id));
+    } else {
+        Flight::json(["message" => "book with this id doesnt exist"]);
+    }
 });
 
 Flight::route('GET /book/isbn/@isbn', function ($isbn) {
@@ -22,4 +26,28 @@ Flight::route('GET /book/search/@search', function ($params) {
 
 Flight::route('POST /book', function () {
     Flight::json(Flight::bookService()->add(Flight::request()->data->getData()));
+});
+
+Flight::route('PUT /book/@id', function ($id) {
+    $data  = Flight::request()->data->getData();
+    $book  = Flight::bookService()->getById($id);
+    $title = $book['title'];
+    if (Flight::bookService()->getById($id) != null) {
+        Flight::bookService()->update($id, $data);
+        Flight::json(["message" => $title . " updated"]);
+    } else {
+        Flight::json(["message" => "book with this id doesnt exist"]);
+    }
+});
+
+Flight::route('DELETE /book/@id', function ($id) {
+    $data  = Flight::request()->data->getData();
+    $book  = Flight::bookService()->getById($id);
+    $title = $book['title'];
+    if (Flight::bookService()->getById($id) != null) {
+        Flight::json(Flight::bookService()->delete($id));
+        Flight::json(["message" => $title . " deleted"]);
+    } else {
+        Flight::json(["message" => "book with this id doesnt exist"]);
+    }
 });
