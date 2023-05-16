@@ -18,8 +18,5 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY composer.json composer.json
 RUN composer install --no-dev
 
-#Working directory settings
-RUN cp -r ./src/. .
-
 EXPOSE 80
 EXPOSE 443
