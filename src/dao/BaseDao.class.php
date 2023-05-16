@@ -11,10 +11,10 @@ class BaseDao
 
     public function __construct($table)
     {
-        $servername = 'db-mysql-fra1-48254-do-user-12209601-0.b.db.ondigitalocean.com';
-        $username   = 'doadmin';
-        $password   = 'AVNS_5FL0VAwliaL9FttmarH';
-        $schema     = 'defaultdb';
+        $servername = getenv('BOOKSHELF_SERVERNAME');
+        $username   = getenv('BOOKSHELF_USERNAME');
+        $password   = getenv('BOOKSHELF_PASSWORD');
+        $schema     = getenv('BOOKSHELF_SCHEMA');
         $port       = 25060;
 
         $this->conn = new PDO("mysql:host=$servername;dbname=$schema;port=$port", $username, $password);
