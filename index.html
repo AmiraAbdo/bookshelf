@@ -29,19 +29,22 @@
     <header>
       <nav class="navbar navbar-expand-lg" style="background-color: #e65e8b;">
         <div class="container-fluid">
-          <a class="navbar-brand" style="color:#320a28;" href="#">Navbar</a>
+          <a class="navbar-brand" style="color:#320a28;" href="#">Bookshelf-app</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <!-- <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Bookshelf-app</a>
+              </li> -->
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <button class="nav-link" onclick="BookshelfService.list()">My shelves</button>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <button class="nav-link" onclick="BookService.list()">My books</button>
               </li>
-              <li class="nav-item dropdown">
+              <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Dropdown
                 </a>
@@ -51,10 +54,10 @@
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <!-- <li class="nav-item">
                 <a class="nav-link disabled">Disabled</a>
-              </li>
+              </li> -->
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -84,9 +87,9 @@
 
       <div class="album py-5 bg-body-tertiary" >
         <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="book-list">
-
-          </div>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="book-list"></div>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="bookshelf-list"></div>
+          
         </div>
       </div>
     </main>
@@ -107,11 +110,13 @@
       </div>
     </footer>
     <script src="./frontend/js/BookService.js"></script>
+    <script src="./frontend/js/BookshelfService.js"></script>
     <script src="./frontend/js/SPApp.js"></script>
     <script src="./frontend/js/jquery.js"></script>
     <script src="./frontend/js/bootstrap.bundle.min.js"></script>
     <script>
       BookService.init();
+      BookshelfService.init();
     </script>
   </body>
 </html>
