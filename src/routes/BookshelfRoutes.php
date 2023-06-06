@@ -47,3 +47,7 @@ Flight::route('DELETE /bookshelf/@id', function ($id) {
         Flight::json(["message" => "bookshelf with this id doesnt exist"]);
     }
 });
+
+Flight::route('GET /bookshelf/books/@id', function ($id) {
+    Flight::json(Flight::bookshelfService()->getBooks($id));
+});

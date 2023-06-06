@@ -33,7 +33,7 @@ var BookService = {
                             </div>
                         </div>
                     </div>
-                `
+                `;
             }
             $("#book-list").html(html);
             $("#book-list").data("book", data);
