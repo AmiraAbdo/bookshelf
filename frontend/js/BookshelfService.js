@@ -18,16 +18,15 @@ var BookshelfService = {
                                 <p class="card-text">
                                     `+ data[i].description + `
                                 </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group" style="margin-top:auto">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="BookshelfService.getBooks(` + data[i].idbookshelf + `)">
-                                            View
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                                            Edit
-                                        </button>
-                                    </div>
-                                    <small class="text-body-secondary">9 mins</small>
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="BookshelfService.getBooks(` + data[i].idbookshelf + `)">
+                                        View
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        Edit
+                                    </button>
                                 </div>
                             </div>
                         </div>
