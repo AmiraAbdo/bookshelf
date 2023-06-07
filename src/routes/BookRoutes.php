@@ -50,7 +50,7 @@ Flight::route('DELETE /book/@id', function ($id) {
     $book  = Flight::bookService()->getById($id);
     $title = $book['title'];
     if (Flight::bookService()->getById($id) != null) {
-        Flight::json(Flight::bookService()->delete($id));
+        Flight::bookService()->delete($id);
         Flight::json(["message" => $title . " deleted"]);
     } else {
         Flight::json(["message" => "book with this id doesnt exist"]);
