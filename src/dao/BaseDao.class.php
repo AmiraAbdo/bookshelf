@@ -3,6 +3,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+require_once 'src/Database.php';
 
 class BaseDao
 {
@@ -11,16 +12,10 @@ class BaseDao
 
     public function __construct($table)
     {
-        $servername = getenv('BOOKSHELF_SERVERNAME');
-        $username   = getenv('BOOKSHELF_USERNAME');
-        $password   = getenv('BOOKSHELF_PASSWORD');
-        $schema     = getenv('BOOKSHELF_SCHEMA');
-        $port       = 25060;
-
-        $this->conn = new PDO("mysql:host=$servername;dbname=$schema;port=$port", $username, $password);
-        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->table = $table;
+        $this->conn  = Database::getInstance()->getConnection();
     }
+
 
     public function getAll()
     {

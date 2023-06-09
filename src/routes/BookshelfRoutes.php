@@ -41,9 +41,13 @@ Flight::route('DELETE /bookshelf/@id', function ($id) {
     $bookshelf  = Flight::bookshelfService()->getById($id);
     $name       = $bookshelf['name'];
     if (Flight::bookshelfService()->getById($id) != null) {
-        Flight::json(Flight::bookshelfService()->delete($id));
+        Flight::bookshelfService()->delete($id);
         Flight::json(["message" => $name . " deleted"]);
     } else {
         Flight::json(["message" => "bookshelf with this id doesnt exist"]);
     }
+});
+
+Flight::route('GET /bookshelf/books/@id', function ($id) {
+    Flight::json(Flight::bookshelfService()->getBooks($id));
 });
