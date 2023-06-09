@@ -10,13 +10,13 @@ require_once './src/services/BaseService.class.php';
 require_once './src/services/BookService.class.php';
 require_once './src/services/BookshelfService.class.php';
 
-Flight::route('/', function () {
-    echo 'hello world!';
-});
+// Flight::route('/', function () {
+//     echo 'hello world!';
+// });
 
-Flight::route('/rani', function () {
-    echo 'hello world Rani!';
-});
+// Flight::route('/rani', function () {
+//     echo 'hello world Rani!';
+// });
 
 Flight::register('baseService', 'BaseService');
 Flight::register('bookService', 'BookService');
