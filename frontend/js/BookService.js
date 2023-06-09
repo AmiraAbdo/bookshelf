@@ -13,7 +13,7 @@ var BookService = {
                 <!--krene kartica-->
                     <div class="col">
                         <div class="card shadow-sm" style="height:100%">
-                            <img src="../bookshelf/frontend/assets/tfios.jpg" ></img>
+                            <img src="frontend/assets/tfios.jpg" ></img>
                             <div class="card-body">
                                 <h3>` + data[i].title + ` - ` + data[i].author + `</h3>
                                 <p class="card-text">

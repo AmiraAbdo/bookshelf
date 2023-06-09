@@ -12,7 +12,7 @@ var BookshelfService = {
                 <!--krene kartica-->
                     <div class="col">
                         <div class="card shadow-sm" style="height:100%">
-                            <img src="../bookshelf/frontend/assets/bookshelf.jpg" ></img>
+                            <img src="frontend/assets/bookshelf.jpg" ></img>
                             <div class="card-body">
                                 <h3>` + data[i].name + `</h3>
                                 <p class="card-text">
