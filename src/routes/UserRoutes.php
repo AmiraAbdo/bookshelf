@@ -28,12 +28,20 @@ Flight::route('POST /login', function () {
     $data = Flight::request()->data->getData();
     $user = Flight::userService()->getByUsername($data['username']);
     if ($user != null) {
-        if ($user['password'] == $data['password']) {
-            Flight::json("brao");
+        if ($user['password'] == md5($data['password'])) {
+            Flight::json("yay");
         } else {
             Flight::json(["message" => "wrong password"]);
         }
     } else {
         Flight::json(["message" => "user with this username doesnt exist"]);
+    }
+});
+
+Flight::route('POST /register', function () {
+    $data    = Flight::request()->data->getData();
+    $newUser = Flight::userService()->register($data);
+    if($newUser != null) {
+        Flight::userService()->add($newUser);
     }
 });
