@@ -86,4 +86,10 @@ class BaseDao
         $stmt->bindParam(':id', $id); // SQL injection prevention
         $stmt->execute();
     }
+
+    public function oneRow($query, $params)
+    {
+        $stmt = $this->queryParams($query, $params);
+        return reset($stmt);
+    }
 }
