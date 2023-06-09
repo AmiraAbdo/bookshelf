@@ -9,6 +9,7 @@ require_once './vendor/autoload.php';
 require_once './src/services/BaseService.class.php';
 require_once './src/services/BookService.class.php';
 require_once './src/services/BookshelfService.class.php';
+require_once './src/services/UserService.class.php';
 
 // Flight::route('/', function () {
 //     echo 'hello world!';
@@ -21,6 +22,7 @@ require_once './src/services/BookshelfService.class.php';
 Flight::register('baseService', 'BaseService');
 Flight::register('bookService', 'BookService');
 Flight::register('bookshelfService', 'BookshelfService');
+Flight::register('userService', 'userService');
 
 // Flight::route('GET /bookshelf', function () {
 //     $stmt = Flight::get("connection")->prepare("SELECT * FROM book;");
@@ -36,5 +38,6 @@ Flight::register('bookshelfService', 'BookshelfService');
 
 require_once __DIR__ . '/src/routes/BookRoutes.php';
 require_once __DIR__ . '/src/routes/BookshelfRoutes.php';
+require_once __DIR__ . '/src/routes/UserRoutes.php';
 
 Flight::start();
