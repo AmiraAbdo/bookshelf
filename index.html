@@ -27,7 +27,11 @@
     -->
     <!---navbar-->
     <header>
-      <nav class="navbar navbar-expand-lg" style="background-color: #e65e8b">
+      <nav
+        class="navbar navbar-expand-lg"
+        style="background-color: #e65e8b"
+        id="user-navbar"
+      >
         <div class="container-fluid">
           <a class="navbar-brand" style="color: #320a28" href="#"
             >Bookshelf-app</a
@@ -46,9 +50,6 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <!-- <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Bookshelf-app</a>
-              </li> -->
               <li class="nav-item">
                 <button class="nav-link" onclick="BookshelfService.list()">
                   My shelves
@@ -90,10 +91,41 @@
               </button>
             </form>
             <div class="btn-group">
-              <button type="button" class="btn btn-info" onclick="UserService.showLogin()">Log in</button>
-              <button type="button" class="btn btn-info" onclick="UserService.register()">Register</button>
+              <button
+                type="button"
+                class="btn btn-info"
+                onclick="UserService.logout()"
+              >
+                Log out
+              </button>
             </div>
           </div>
+        </div>
+      </nav>
+      <nav
+        class="navbar navbar-expand-lg"
+        style="background-color: #e65e8b"
+        id="guest-navbar"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" style="color: #320a28" href="#"
+            >Bookshelf-app</a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse"
+            id="navbarSupportedContent"
+          ></div>
         </div>
       </nav>
     </header>
@@ -117,12 +149,8 @@
 
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
-          
-          <div class="container py-5 h-100" id="register">
-           
-          </div>
-          <div class="container py-5 h-100" id="login">
-          </div>
+          <div class="container py-5 h-100" id="register"></div>
+          <div class="container py-5 h-100" id="login"></div>
           <div
             class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
             id="book-list"
@@ -135,6 +163,12 @@
             class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
             id="bookshelf-book-list"
           ></div>
+          <div class="container py-5 h-100" id="start">
+            <div
+              class="row d-flex justify-content-center align-items-center h-100"
+            >
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -162,9 +196,9 @@
     <script src="./frontend/js/bootstrap.bundle.min.js"></script>
     <script src="./frontend/js/jquery.validate.min.js"></script>
     <script>
+      UserService.init();
       BookService.init();
       BookshelfService.init();
-      UserService.init();
     </script>
   </body>
 </html>

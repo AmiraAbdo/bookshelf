@@ -1,5 +1,12 @@
 var UserService = {
   init: function () {
+    if (localStorage.getItem("token") === null) {
+      
+      UserService.guest();
+    } else {
+
+      UserService.user();
+    }
     $("#login-button").click(function () {
       UserService.validateLogin();
     });
@@ -10,7 +17,6 @@ var UserService = {
     $('#login-form').validate({
       submitHandler: function (form) {
         var entity = Object.fromEntries((new FormData(form)).entries());
-        console.log(entity);
         $.ajax({
           url: 'login',
           type: 'POST',
@@ -21,7 +27,7 @@ var UserService = {
 
             localStorage.setItem("token", response.token);
             // UserService.showUserNavbar();
-            BookService.list();
+            UserService.user();
           },
           error: function (response) {
             console.log(response);
@@ -45,7 +51,7 @@ var UserService = {
                     <h4 class="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
                   </div>
                   <form id="login-form">
-                      <div class="mb-3">
+                      <div class="mbU-3">
                           <label for="username" class="form-label" id="username">Username</label>
                           <input type="text" class="form-control required" id="username" name="username">
                       </div>
@@ -82,4 +88,65 @@ var UserService = {
 
     return (JSON.parse(jsonPayload));
   },
+
+  user: function () {
+    $("#guest-navbar").hide();
+    $("#user-navbar").show();
+    BookService.list();
+  },
+
+  guest: function () {
+    $("#guest-navbar").show();
+    $("#user-navbar").hide();
+    UserService.showStart();
+  },
+
+  logout: function () {
+    localStorage.clear();
+    UserService.guest();
+    console.log(localStorage.getItem('token'));
+  },
+
+  showStart: function () {
+    SPApp.handleSectionVisibility("#start");
+    var html = `
+    <div class="col-xl-10">
+    <div class="card rounded-3 text-black">
+      <div class="row g-0">
+        <div class="col-lg-6">
+          <div class="card-body p-md-5 mx-md-4">
+            <div class="text-center">
+              <h4 class="mt-1 mb-5 pb-1">Welcome!</h4>
+            </div>
+            <div class="text-center row">
+              <button
+                class="btn my-4 py-3"
+                style="background-color: #5ee6b9"
+                onclick="UserService.showLogin()"
+              >
+                log in
+              </button>
+              <button
+                class="btn my-4 py-3"
+                style="background-color: #5ee6b9"
+                onclick="UserService.showLogin()"
+              >
+                register
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 d-flex justify-content-center">
+          <img
+            src="frontend/assets/frog.png"
+            class="img-fluid"
+            style="padding: 5%"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+    `;
+    $("#start").html(html);
+  }
 }
