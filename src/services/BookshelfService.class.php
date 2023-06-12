@@ -24,4 +24,9 @@ class BookshelfService extends BaseService
     {
         return $this->dao->getBooks($bookshelf_id);
     }
+
+    public function getByUserId($user_id)
+    {
+        return $this->dao->getByUserId($user_id);
+    }
 }

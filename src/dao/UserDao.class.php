@@ -15,12 +15,7 @@ class UserDao extends BaseDao
 
     public function getByUsername($username)
     {
-        return $this->oneRow("SELECT username, password FROM user WHERE username = :username", ["username" => $username]);
-    }
-
-    public function login($data)
-    {
-
+        return $this->oneRow("SELECT username, password, iduser FROM user WHERE username = :username", ["username" => $username]);
     }
 
     public function register($data)

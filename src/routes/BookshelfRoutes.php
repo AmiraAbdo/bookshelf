@@ -71,3 +71,9 @@ Flight::route('GET /bookshelf/books/@id', function ($id) {
         Flight::json(Flight::bookshelfService()->getBooks($id));
     }
 });
+
+Flight::route('GET /bookshelf/user/@id', function ($id) {
+    // $user = Flight::get('user');
+    $bookshelf = Flight::bookshelfService()->getByUserId($id);
+    Flight::json($bookshelf);
+});

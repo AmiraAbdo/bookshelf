@@ -27,4 +27,10 @@ class BookshelfDao extends BaseDao
         GROUP BY (b.idbook);";
         return $this->queryParams($query, ['idbookshelf' => $idbookshelf]);
     }
+
+    public function getByUserId($iduser)
+    {
+        $query = "SELECT * FROM bookshelf b WHERE user_id = :iduser";
+        return $this->queryParams($query, ['iduser' => $iduser]);
+    }
 }

@@ -5,8 +5,9 @@ var BookshelfService = {
 
     list: function () {
         var payload = UserService.parseJWT(localStorage.getItem("token"));
+        // console.log(payload);
         $.ajax({
-            url: 'bookshelf',
+            url: 'bookshelf/user/' + payload.iduser,
             type: 'GET',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', localStorage.getItem('token'))
@@ -42,6 +43,9 @@ var BookshelfService = {
                 }
                 $('#bookshelf-list').html(html)
                 $('#bookshelf-list').data('book', data)
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(errorThrown);
             }
         })
     },
