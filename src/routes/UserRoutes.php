@@ -43,5 +43,7 @@ Flight::route('POST /register', function () {
     $newUser = Flight::userService()->register($data);
     if ($newUser != null) {
         Flight::userService()->add($newUser);
+        $jwt = JWT::encode($newUser, JWT_SECRET, 'HS256');
+        Flight::json(['token' => $jwt]);
     }
 });
