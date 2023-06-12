@@ -93,5 +93,80 @@ var BookshelfService = {
                 $('#bookshelf-book-list').data('book', data)
             }
         })
+    },
+
+    showAdd: function () {
+        SPApp.handleSectionVisibility("add-shelf");
+        var html =
+            `
+        <div
+        class="row d-flex justify-content-center align-items-center h-100"
+      >
+        <div class="col-xl-10">
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
+              <div class="col">
+                <div class="card-body p-md-5 mx-md-4">
+                  <div class="text-center">
+                    <h4 class="mt-1 mb-5 pb-1">Add shelf</h4>
+                  </div>
+                  <div class="text-center row">
+                    <form id="add-shelf-form">
+                      <div class="text-start my-4">
+                        <label
+                          for="name"
+                          class="form-label"
+                          id="name"
+                          >Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control required"
+                          id="name"
+                          name="name"
+                        />
+                      </div>
+                      <div class="text-start my-4">
+                        <label
+                          for="description"
+                          class="form-label"
+                          id="description"
+                          >Description</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="description"
+                          name="description"
+                        />
+                      </div>
+                      <div>
+                        <button
+                            class="btn btn-danger my-2 py-3 px-4"
+                            onclick="BookshelfService.list()"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            class="btn my-2 py-3 px-4"
+                            style="background-color: #5ee6b9"
+                            onclick="BookshelfService.add()"
+                        >
+                            Add shelf
+                        </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        `;
+        $("#add-shelf").html(html);
+    },
+
+    add: function (data) {
+
     }
 }

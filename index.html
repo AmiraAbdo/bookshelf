@@ -130,18 +130,20 @@
       </nav>
     </header>
     <main>
-      <section class="py-5 text-center container">
-        <div class="row py-lg-5">
+      <section class="py-5 text-center container" id="section">
+        <div class="row align-items-start">
           <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Album example</h1>
-            <p class="lead text-body-secondary">
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks dont simply skip over it entirely.
-            </p>
+            <h1 class="fw-light">Hi, username</h1>
+          </div>
+          <div class="col-lg-6 col-md-8 mx-auto">
             <p>
-              <a href="#" class="btn btn-primary my-2">Main call to action</a>
-              <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+              <button
+                href="#"
+                class="btn btn-lg my-2 px-4"
+                style="background-color: #5ee6b9"
+                onclick="BookshelfService.showAdd()"
+                >Add shelf</button
+              >
             </p>
           </div>
         </div>
@@ -166,9 +168,9 @@
           <div class="container py-5 h-100" id="start">
             <div
               class="row d-flex justify-content-center align-items-center h-100"
-            >
-            </div>
+            ></div>
           </div>
+          <div class="container py-5 h-100" id="add-shelf"></div>
         </div>
       </div>
     </main>

@@ -1,10 +1,8 @@
 var UserService = {
   init: function () {
     if (localStorage.getItem("token") === null) {
-      
       UserService.guest();
     } else {
-
       UserService.user();
     }
 
@@ -161,12 +159,14 @@ var UserService = {
     $("#guest-navbar").hide();
     $("#user-navbar").show();
     BookService.list();
+    $("#section").show();
   },
 
   guest: function () {
     $("#guest-navbar").show();
     $("#user-navbar").hide();
     UserService.showStart();
+    $("#section").hide();
   },
 
   logout: function () {
