@@ -4,6 +4,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+require_once './config.php';
+
+use Firebase\JWT\JWT;
+
+// use Firebase\JWT\Key;
+
 Flight::route('GET /user', function () {
     Flight::json(Flight::userService()->getAll());
 });
@@ -16,20 +22,14 @@ Flight::route('GET /user/@id', function ($id) {
     }
 });
 
-// Flight::route('GET /user/username/@username', function ($username) {
-//     if (Flight::userService()->getByUsername($username) != null) {
-//         Flight::json(Flight::userService()->getByUsername($username));
-//     } else {
-//         Flight::json(["message" => "user with this username doesnt exist"]);
-//     }
-// });
-
 Flight::route('POST /login', function () {
     $data = Flight::request()->data->getData();
     $user = Flight::userService()->getByUsername($data['username']);
     if ($user != null) {
         if ($user['password'] == md5($data['password'])) {
-            Flight::json("yay");
+            // Flight::json("yay");
+            $jwt = JWT::encode($user, JWT_SECRET, 'HS256');
+            Flight::json(['token' => $jwt]);
         } else {
             Flight::json(["message" => "wrong password"]);
         }
@@ -41,7 +41,7 @@ Flight::route('POST /login', function () {
 Flight::route('POST /register', function () {
     $data    = Flight::request()->data->getData();
     $newUser = Flight::userService()->register($data);
-    if($newUser != null) {
+    if ($newUser != null) {
         Flight::userService()->add($newUser);
     }
 });
