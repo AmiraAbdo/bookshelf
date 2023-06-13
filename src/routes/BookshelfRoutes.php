@@ -30,9 +30,12 @@ Flight::route('GET /bookshelf/search/@search', function ($params) {
 });
 
 Flight::route('POST /bookshelf', function () {
-    $user = Flight::get('user');
+    $user            = Flight::get('user');
+    $data            = Flight::request()->data->getData();
+    $data['user_id'] = $user['iduser'];
+    // exit;
     if (isset($user['username'])) {
-        Flight::json(Flight::bookshelfService()->add(Flight::request()->data->getData()));
+        Flight::json(Flight::bookshelfService()->add($data));
     }
 });
 

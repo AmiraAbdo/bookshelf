@@ -96,7 +96,7 @@ var BookshelfService = {
     },
 
     showAdd: function () {
-        SPApp.handleSectionVisibility("add-shelf");
+        SPApp.handleSectionVisibility("#add-shelf");
         var html =
             `
         <div
@@ -166,7 +166,29 @@ var BookshelfService = {
         $("#add-shelf").html(html);
     },
 
-    add: function (data) {
-
+    add: function () {
+        var payload = UserService.parseJWT(localStorage.getItem("token"));
+        $("#add-shelf-form").validate({
+            submitHandler: function (form) {
+                var data = Object.fromEntries((new FormData(form)).entries());
+                $.ajax({
+                    url: 'bookshelf',
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', localStorage.getItem('token'))
+                    },
+                    success: function (data) {
+                        // console.log(data);
+                        BookshelfService.list();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(errorThrown);
+                    }
+                })
+            }
+        })
     }
 }
