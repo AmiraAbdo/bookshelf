@@ -138,11 +138,16 @@
           <div class="col-lg-6 col-md-8 mx-auto">
             <p>
               <button
-                href="#"
                 class="btn btn-lg my-2 px-4"
                 style="background-color: #5ee6b9"
                 onclick="BookshelfService.showAdd()"
                 >Add shelf</button
+              >
+              <button
+                class="btn btn-lg my-2 px-4"
+                style="background-color: #5ee6b9"
+                onclick="BookService.showAdd()"
+                >Add book</button
               >
             </p>
           </div>
@@ -171,6 +176,8 @@
             ></div>
           </div>
           <div class="container py-5 h-100" id="add-shelf"></div>
+          <div class="container py-5 h-100" id="add-book"></div>
+
         </div>
       </div>
     </main>
