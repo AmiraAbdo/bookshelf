@@ -53,8 +53,6 @@ var BookService = {
         SPApp.handleSectionVisibility("#add-book");
         var html =
             `
-            <div>
-            <div class="container py-5 h-100" id="add-shelf">
               <div
                 class="row d-flex justify-content-center align-items-center h-100"
               >
@@ -204,8 +202,6 @@ var BookService = {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
         `;
         $("#add-book").html(html);
 
