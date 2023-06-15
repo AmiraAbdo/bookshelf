@@ -190,5 +190,5 @@ var BookshelfService = {
                 })
             }
         })
-    }
+    },
 }

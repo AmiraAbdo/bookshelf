@@ -1,23 +1,23 @@
 var BookService = {
-    init: function () {
-        BookService.list();
-    },
+  init: function () {
+    BookService.list();
+  },
 
-    list: function () {
-        var payload = UserService.parseJWT(localStorage.getItem("token"));
-        $.ajax({
-            url: 'book',
-            type: 'GET',
-            contentType: 'application/json',
-            dataType: 'json',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-            },
-            success: function (data) {
-                SPApp.handleSectionVisibility("#book-list");
-                var html = "";
-                for (let i = 0; i < data.length; i++) {
-                    html += `
+  list: function () {
+    var payload = UserService.parseJWT(localStorage.getItem("token"));
+    $.ajax({
+      url: 'book',
+      type: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        SPApp.handleSectionVisibility("#book-list");
+        var html = "";
+        for (let i = 0; i < data.length; i++) {
+          html += `
                     
                     <!--krene kartica-->
                         <div class="col">
@@ -31,7 +31,7 @@ var BookService = {
                                 </div>
                                 <div class="card-footer">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="BookService.getBooks(` + data[i].idbookshelf + `)">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="BookService.getBookById(` + data[i].idbook + `)">
                                             View
                                         </button>
                                         <button type="button" class="btn btn-sm btn-outline-secondary">
@@ -42,17 +42,17 @@ var BookService = {
                             </div>
                         </div>
                     `;
-                }
-                $("#book-list").html(html);
-                $("#book-list").data("book", data);
-            }
-        })
-    },
+        }
+        $("#book-list").html(html);
+        $("#book-list").data("book", data);
+      }
+    })
+  },
 
-    showAdd: function () {
-        SPApp.handleSectionVisibility("#add-book");
-        var html =
-            `
+  showAdd: function () {
+    SPApp.handleSectionVisibility("#add-book");
+    var html =
+      `
               <div
                 class="row d-flex justify-content-center align-items-center h-100"
               >
@@ -203,41 +203,93 @@ var BookService = {
                 </div>
               </div>
         `;
-        $("#add-book").html(html);
+    $("#add-book").html(html);
 
 
-    },
+  },
 
-    add: function () {
-        var payload = UserService.parseJWT(localStorage.getItem("token"));
-        $("#add-book-form").validate({
-            submitHandler: function (form) {
-                var data = Object.fromEntries((new FormData(form)).entries());
-                const switchElement = document.getElementById("nyt");
-                var switchState = switchElement.checked;
-                if (switchState === true) {
-                    data.NYT_bestseller = 1;
-                }
-                data.created_by = payload.iduser;
-                $.ajax({
-                    url: 'book',
-                    type: 'POST',
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader('Authorization', localStorage.getItem('token'))
-                    },
-                    success: function (data) {
-                        // console.log(data);
-                        BookService.list();
-                        console.log(data);
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        console.log(errorThrown);
-                    }
-                })
-            }
+  add: function () {
+    var payload = UserService.parseJWT(localStorage.getItem("token"));
+    $("#add-book-form").validate({
+      submitHandler: function (form) {
+        var data = Object.fromEntries((new FormData(form)).entries());
+        const switchElement = document.getElementById("nyt");
+        var switchState = switchElement.checked;
+        if (switchState === true) {
+          data.NYT_bestseller = 1;
+        }
+        data.created_by = payload.iduser;
+        $.ajax({
+          url: 'book',
+          type: 'POST',
+          data: JSON.stringify(data),
+          contentType: 'application/json',
+          dataType: 'json',
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', localStorage.getItem('token'))
+          },
+          success: function (data) {
+            // console.log(data);
+            BookService.list();
+            console.log(data);
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(errorThrown);
+          }
         })
-    }
+      }
+    })
+  },
+
+  getBookById: function (idbook) {
+    var payload = UserService.parseJWT(localStorage.getItem("token"));
+    $.ajax({
+      url: 'book/' + idbook,
+      type: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
+      success: function (data) {
+        SPApp.handleSectionVisibility("#book");
+        var NYT;
+        if(data.NYT_bestseller==1){
+          NYT = 'New York Times Bestseller';
+        } else if (data.NYT_bestseller==0){
+          NYT="";
+        }
+        var html = `
+        <div class="card rounded-3 text-black">
+          <div class="row">
+            <div class="p-3">
+              <button class="btn" style="background-color: #5ee6b9" onclick="BookService.list()">Back</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3 m-4">
+              <img
+                class="img-fluid"
+                src="frontend/assets/jadi_mladog_vertera.jpg"
+              />
+            </div>
+            <div class="col-5 m-4">
+              <h1>`+data.title+`</h1>
+              <h3>`+data.author+`</h3>
+              <p>`+data.synopsis+`</p>
+            </div>
+            <div class="col-2 m-4 my-5">
+              <p id="nyt">`+NYT+`</p>
+              <p>`+data.genre+`</p>
+              <p>`+data.progress+`</p>
+            </div>
+          </div>
+        </div>
+        `;
+
+        $("#book").html(html);
+        $("#book").data("book", data);
+      }
+    })
+  }
 }
