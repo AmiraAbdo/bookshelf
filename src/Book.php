@@ -10,6 +10,8 @@ class Book
     public $NYT_bestseller = 0;
     public $created_by;
 
+    public $progress = "unread";
+
     public function __construct($array)
     {
         foreach($array as $key => $value) {
@@ -59,6 +61,12 @@ class Book
         return $this;
     }
 
+    public function progress($progress)
+    {
+        $this->progress = $progress;
+        return $this;
+    }
+
     public function build()
     {
         return $this;
@@ -68,4 +76,6 @@ class Book
     {
 
     }
+
+
 }
