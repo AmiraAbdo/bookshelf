@@ -80,3 +80,12 @@ Flight::route('GET /bookshelf/user/@id', function ($id) {
     $bookshelf = Flight::bookshelfService()->getByUserId($id);
     Flight::json($bookshelf);
 });
+
+Flight::route('POST /bookshelf/books', function () {
+    $user            = Flight::get('user');
+    $data            = Flight::request()->data->getData();
+    $data['user_id'] = $user['iduser'];
+    if (isset($user['username'])) {
+        Flight::json(Flight::bookshelfService()->addBookToShelf($data['idbook'], $data['idbookshelf']));
+    }
+});

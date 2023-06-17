@@ -33,4 +33,11 @@ class BookshelfDao extends BaseDao
         $query = "SELECT * FROM bookshelf b WHERE user_id = :iduser";
         return $this->queryParams($query, ['iduser' => $iduser]);
     }
+
+    public function addBookToShelf($idbook, $idbookshelf)
+    {
+        $query = "INSERT INTO book_bookshelf (book_id, bookshelf_id) VALUES (:idbook, :idbookshelf);";
+        return $this->queryParams($query, ['idbook' => $idbook, 'idbookshelf' => $idbookshelf]);
+    }
+
 }
