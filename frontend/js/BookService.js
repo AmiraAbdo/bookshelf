@@ -507,20 +507,20 @@ var BookService = {
         var data = Object.fromEntries((new FormData(form)).entries());
         const switchElement = document.getElementById("nyt");
         var switchState = switchElement.checked;
-        data.NYT_bestseller=0;
+        data.NYT_bestseller = 0;
         if (switchState === true) {
           data.NYT_bestseller = 1;
         }
         data.created_by = payload.iduser;
         // var rb = document.querySelector('input[name="progress"]:checked').value;
-        if($("#read").is(":checked")){
+        if ($("#read").is(":checked")) {
           data.progress = "read";
-        } else if ($("#unread").is(":checked")){
+        } else if ($("#unread").is(":checked")) {
           data.progress = "unread";
-        } else if ($("#reading").is(":checked")){
+        } else if ($("#reading").is(":checked")) {
           data.progress = "reading";
         }
-        
+
         $.ajax({
           url: 'book/' + idbook,
           type: 'PUT',

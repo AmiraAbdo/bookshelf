@@ -32,7 +32,7 @@ var BookshelfService = {
                                     <button type="button" class="btn btn-sm btn-outline-secondary" onclick="BookshelfService.getBooks(` + data[i].idbookshelf + `)">
                                         View
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick = "BookshelfService.showEdit(`+ data[i].idbookshelf + `)">
                                         Edit
                                     </button>
                                 </div>
@@ -191,4 +191,121 @@ var BookshelfService = {
             }
         })
     },
+
+    showEdit: function (idbookshelf) {
+        var payload = UserService.parseJWT(localStorage.getItem("token"));
+        $.ajax({
+
+            url: 'bookshelf/' + idbookshelf,
+            type: 'GET',
+            contentType: 'application/json',
+            dataType: 'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
+            success: function (data) {
+                SPApp.handleSectionVisibility("#edit-shelf");
+                var html = `
+                <div
+                class="row d-flex justify-content-center align-items-center h-100"
+              >
+                <div class="col-xl-10">
+                  <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                      <div class="col">
+                        <div class="card-body p-md-5 mx-md-4">
+                          <div class="text-center">
+                            <h4 class="mt-1 mb-5 pb-1">Edit shelf</h4>
+                          </div>
+                          <div class="text-center row">
+                            <form id="edit-shelf-form">
+                              <div class="text-start my-4">
+                                <label
+                                  for="name"
+                                  class="form-label"
+                                  id="name"
+                                  >Name</label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control required"
+                                  id="name"
+                                  name="name"
+                                  value =  "`+ data.name + `"
+                                />
+                              </div>
+                              <div class="text-start my-4">
+                                <label
+                                  for="description"
+                                  class="form-label"
+                                  id="description"
+                                  >Description</label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="description"
+                                  name="description"
+                                  value =  "`+ data.description + `"
+                                />
+                              </div>
+                              <div>
+                                <button
+                                    class="btn btn-danger my-2 py-3 px-4"
+                                    onclick="BookshelfService.list()"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    class="btn my-2 py-3 px-4"
+                                    style="background-color: #5ee6b9"
+                                    onclick="BookshelfService.update(`+ data.idbookshelf + `)"
+                                >
+                                    Save changes
+                                </button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                `;
+                $("#edit-shelf").html(html);
+            }
+        })
+    },
+
+    update: function (idbookshelf) {
+        var payload = UserService.parseJWT(localStorage.getItem("token"));
+        $("#edit-shelf-form").validate({
+            submitHandler: function (form) {
+                var data = Object.fromEntries((new FormData(form)).entries());
+                data.user_id = payload.iduser;
+                $.ajax({
+                    url: 'bookshelf/' + idbookshelf,
+                    type: 'PUT',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', localStorage.getItem('token'))
+                    },
+                    success: function (data) {
+                        // console.log(data);
+                        BookshelfService.list();
+                        // console.log(data);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        // console.log(errorThrown);
+                        // console.log(data);
+                        // console.log(idbook);
+                        // console.log(textStatus);
+                        console.log(XMLHttpRequest);
+                    }
+                })
+            }
+        })
+    }
 }
