@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once './config.php';
+require_once '../config.php';
 
 use Firebase\JWT\JWT;
 
@@ -42,8 +42,10 @@ Flight::route('POST /register', function () {
     $data    = Flight::request()->data->getData();
     $newUser = Flight::userService()->register($data);
     if ($newUser != null) {
-        Flight::userService()->add($newUser);
-        $jwt = JWT::encode($newUser, JWT_SECRET, 'HS256');
+        // $test = Flight::userService()->add($newUser);
+        $newUser           = Flight::userService()->add($newUser);
+        $newUser['iduser'] = $newUser['id'];
+        $jwt               = JWT::encode($newUser, JWT_SECRET, 'HS256');
         Flight::json(['token' => $jwt]);
     }
 });
