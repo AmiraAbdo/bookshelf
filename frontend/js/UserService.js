@@ -43,7 +43,7 @@ var UserService = {
               <div class="col-lg-6">
                 <div class="card-body p-md-5 mx-md-4">
                   <div class="text-center">
-                    <h4 class="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
+                    <h4 class="mt-1 mb-5 pb-1">Log in</h4>
                   </div>
                   <form id="login-form">
                       <div class="mbU-3">
@@ -54,7 +54,8 @@ var UserService = {
                           <label for="password" class="form-label" id="password">Password</label>
                           <input type="password" class="form-control required" id="password" name="password">
                       </div>
-                      <button type="submit" class="btn btn-primary" id = "button" onclick="UserService.validateLogin()">Submit</button>
+                      <button type="button" class="btn btn-danger" id = "button" onclick="UserService.showStart()">Cancel</button>
+                      <button type="submit" class="btn btn-primary" id = "button" onclick="UserService.validateLogin()">Log in</button>
                   </form>
                 </div>
               </div>
@@ -110,7 +111,7 @@ var UserService = {
               <div class="col-lg-6">
                 <div class="card-body p-md-5 mx-md-4">
                   <div class="text-center">
-                    <h4 class="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
+                    <h4 class="mt-1 mb-5 pb-1">Register</h4>
                   </div>
                   <form id="register-form">
                       <div class="mbU-3">
@@ -125,7 +126,8 @@ var UserService = {
                           <label for="password" class="form-label" id="password">Password</label>
                           <input type="password" class="form-control required" id="password" name="password">
                       </div>
-                      <button type="submit" class="btn btn-primary" id = "button" onclick="UserService.validateRegister()">Submit</button>
+                      <button type="button" class="btn btn-danger" id = "button" onclick="UserService.showStart()">Cancel</button>
+                      <button type="submit" class="btn btn-primary" id = "button" onclick="UserService.validateRegister()">Register</button>
                   </form>
                 </div>
               </div>
@@ -182,15 +184,16 @@ var UserService = {
   showStart: function () {
     SPApp.handleSectionVisibility("#start");
     var html = `
+    <div class="row d-flex justify-content-center align-items-center h-100">
     <div class="col-xl-10">
-    <div class="card rounded-3 text-black">
-      <div class="row g-0">
-        <div class="col-lg-6">
-          <div class="card-body p-md-5 mx-md-4">
-            <div class="text-center">
-              <h4 class="mt-1 mb-5 pb-1">Welcome!</h4>
-            </div>
-            <div class="text-center row">
+      <div class="card rounded-3 text-black">
+        <div class="row g-0">
+          <div class="col-lg-6">
+            <div class="card-body p-md-5 mx-md-4">
+              <div class="text-center">
+                <h4 class="mt-1 mb-5 pb-1">Welcome!</h4>
+              </div>
+              <div class="text-center row">
               <button
                 class="btn my-4 py-3"
                 style="background-color: #5ee6b9"
@@ -206,18 +209,20 @@ var UserService = {
                 register
               </button>
             </div>
+            </div>
           </div>
-        </div>
-        <div class="col-lg-6 d-flex justify-content-center">
-          <img
-            src="frontend/assets/frog.png"
-            class="img-fluid"
-            style="padding: 5%"
-          />
+          <div class="col-lg-6 d-flex justify-content-center">
+            <img
+              src="frontend/assets/frog.png"
+              class="img-fluid"
+              style="padding: 5%"
+            />
+          </div>
         </div>
       </div>
     </div>
   </div>
+
     `;
     $("#start").html(html);
   }
