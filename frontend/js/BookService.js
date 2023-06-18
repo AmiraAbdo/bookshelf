@@ -17,12 +17,15 @@ var BookService = {
         SPApp.handleSectionVisibility("#book-list");
         var html = "";
         for (let i = 0; i < data.length; i++) {
+          if(data[i].img === null){
+            data[i].img = 'qm.png';
+          }
           html += `
                     
                     <!--krene kartica-->
                         <div class="col">
                             <div class="card shadow-sm" style="height:100%">
-                                <img src="frontend/assets/tfios.jpg" ></img>
+                                <img src="frontend/assets/`+data[i].img+`" ></img>
                                 <div class="card-body">
                                     <h3>` + data[i].title + ` - ` + data[i].author + `</h3>
                                     <p class="card-text">
@@ -291,7 +294,7 @@ var BookService = {
             <div class="col-3 m-4">
               <img
                 class="img-fluid"
-                src="frontend/assets/jadi_mladog_vertera.jpg"
+                src="frontend/assets/`+data.img+`"
               />
             </div>
             <div class="col-5 m-4">
