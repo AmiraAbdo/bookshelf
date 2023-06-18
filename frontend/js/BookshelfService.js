@@ -62,17 +62,15 @@ var BookshelfService = {
       },
       success: function (data) {
         SPApp.handleSectionVisibility('#bookshelf-book-list')
-        // let html = `<div class="col">
-        //   <button>unga</button>
-        // </div>`;
-        var html="";
+        console.log(data.img);
+        var html = "";
         for (let i = 0; i < data.length; i++) {
           html += `
                     <!--krene kartica-->
                     
                     <div class="col">
                         <div class="card shadow-sm" style="height:100%">
-                            <img src="frontend/assets/tfios.jpg" ></img>
+                            <img src="frontend/assets/`+ data[i].img + `" ></img>
                             <div class="card-body">
                                 <h3>` + data[i].title + ` - ` + data[i].author + `</h3>
                                 <p class="card-text">

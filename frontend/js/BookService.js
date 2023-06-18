@@ -17,15 +17,13 @@ var BookService = {
         SPApp.handleSectionVisibility("#book-list");
         var html = "";
         for (let i = 0; i < data.length; i++) {
-          if(data[i].img === null){
+          if (data[i].img === null) {
             data[i].img = 'qm.png';
           }
-          html += `
-                    
-                    <!--krene kartica-->
+          html += `<!--krene kartica-->
                         <div class="col">
                             <div class="card shadow-sm" style="height:100%">
-                                <img src="frontend/assets/`+data[i].img+`" ></img>
+                                <img src="frontend/assets/`+ data[i].img + `" ></img>
                                 <div class="card-body">
                                     <h3>` + data[i].title + ` - ` + data[i].author + `</h3>
                                     <p class="card-text">
@@ -174,16 +172,6 @@ var BookService = {
                                   </script>
                                 </div>
                               </div>
-                              <div class="text-start my-4">
-                                <label for="shelf" class="form-label" id="shelf"
-                                  >Your shelves</label
-                                >
-                                <select class="form-select" id="shelf">
-                                  <option selected>Select...</option>
-                                  <option value="1">Classic</option>
-                                  <option value="2">Graphic novel</option>
-                                </select>
-                              </div>
                               <button
                                 class="btn btn-danger my-2 py-3 px-4"
                                 onclick="BookService.list()"
@@ -294,7 +282,7 @@ var BookService = {
             <div class="col-3 m-4">
               <img
                 class="img-fluid"
-                src="frontend/assets/`+data.img+`"
+                src="frontend/assets/`+ data.img + `"
               />
             </div>
             <div class="col-5 m-4">
@@ -451,16 +439,6 @@ var BookService = {
                                   
                                   </script>
                                 </div>
-                              </div>
-                              <div class="text-start my-4">
-                                <label for="shelf" class="form-label" id="shelf"
-                                  >Your shelves</label
-                                >
-                                <select class="form-select" id="shelf">
-                                  <option selected>Select...</option>
-                                  <option value="1">Classic</option>
-                                  <option value="2">Graphic novel</option>
-                                </select>
                               </div>
                               <div class="text-start my-4">
                                 <div class="form-check">
