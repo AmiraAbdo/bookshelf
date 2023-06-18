@@ -8,12 +8,12 @@ error_reporting(E_ALL);
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-require_once './vendor/autoload.php';
-require_once './src/services/BaseService.class.php';
-require_once './src/services/BookService.class.php';
-require_once './src/services/BookshelfService.class.php';
-require_once './src/services/UserService.class.php';
-require_once './config.php';
+require_once '../vendor/autoload.php';
+require_once './services/BaseService.class.php';
+require_once './services/BookService.class.php';
+require_once './services/BookshelfService.class.php';
+require_once './services/UserService.class.php';
+require_once '../config.php';
 
 // Flight::route('/', function () {
 //     echo 'hello world!';
@@ -43,7 +43,7 @@ Flight::register('userService', 'userService');
 Flight::route('/*', function () {
 
     Flight::map('query', function ($name, $default_value = "") {
-        $request = Flight::request();
+        $request     = Flight::request();
         $query_param = @$request->query->getData()[$name];
         $query_param = $query_param ? $query_param : $default_value;
         return urldecode($query_param);
@@ -54,27 +54,31 @@ Flight::route('/*', function () {
 
     $path = Flight::request()->url;
     if ($path == '/docs.json' || $path == '/login' || $path == '/register') {
-        return TRUE;
+        return true;
     }
 
     $headers = getallheaders();
     if (@!$headers['Authorization']) {
         Flight::json(["message" => "Authorization is missing"], 403);
-        return FALSE;
+        return false;
     } else {
         try {
             $decoded = (array)JWT::decode($headers['Authorization'], new Key(JWT_SECRET, 'HS256'));
             Flight::set('user', $decoded);
-            return TRUE;
+            return true;
         } catch (\Exception $e) {
             Flight::json(["message" => "Authorization token is not valid"], 403);
-            return FALSE;
+            return false;
         }
     }
 });
 
-require_once __DIR__ . '/src/routes/BookRoutes.php';
-require_once __DIR__ . '/src/routes/BookshelfRoutes.php';
-require_once __DIR__ . '/src/routes/UserRoutes.php';
+// require_once __DIR__ . '/src/routes/BookRoutes.php';
+// require_once __DIR__ . '/src/routes/BookshelfRoutes.php';
+// require_once __DIR__ . '/src/routes/UserRoutes.php';
+
+require_once './routes/BookRoutes.php';
+require_once './routes/BookshelfRoutes.php';
+require_once './routes/UserRoutes.php';
 
 Flight::start();
