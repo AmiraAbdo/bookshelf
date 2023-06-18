@@ -6,7 +6,7 @@ var BookService = {
   list: function () {
     var payload = UserService.parseJWT(localStorage.getItem("token"));
     $.ajax({
-      url: 'book',
+      url: 'src/book',
       type: 'GET',
       contentType: 'application/json',
       dataType: 'json',
@@ -220,7 +220,7 @@ var BookService = {
         }
         data.created_by = payload.iduser;
         $.ajax({
-          url: 'book',
+          url: 'src/book',
           type: 'POST',
           data: JSON.stringify(data),
           contentType: 'application/json',
@@ -244,7 +244,7 @@ var BookService = {
   getBookById: function (idbook) {
     var payload = UserService.parseJWT(localStorage.getItem("token"));
     $.ajax({
-      url: 'book/' + idbook,
+      url: 'src/book/' + idbook,
       type: 'GET',
       contentType: 'application/json',
       dataType: 'json',
@@ -270,13 +270,20 @@ var BookService = {
                 Back
               </button>
             </div>
-            <div class="col offset-9">
+            <div class="col offset-5">
               <button
                 class="btn"
                 style="background-color: #5ee6b9"
                 onclick="BookService.showEdit(`+ data.idbook + `)"
               >
                 Update
+              </button>
+              <button
+                class="btn my-3"
+                style="background-color: #5ee6b9"
+                onclick="BookshelfService.showEdit(`+ data.idbook + `)"
+              >
+                Add to shelf
               </button>
             </div>
           </div>
@@ -310,7 +317,7 @@ var BookService = {
   showEdit: function (idbook) {
     var payload = UserService.parseJWT(localStorage.getItem("token"));
     $.ajax({
-      url: 'book/' + idbook,
+      url: 'src/book/' + idbook,
       type: 'GET',
       contentType: 'application/json',
       dataType: 'json',
@@ -522,7 +529,7 @@ var BookService = {
         }
 
         $.ajax({
-          url: 'book/' + idbook,
+          url: 'src/book/' + idbook,
           type: 'PUT',
           data: JSON.stringify(data),
           contentType: 'application/json',

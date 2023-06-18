@@ -13,7 +13,7 @@ var UserService = {
       submitHandler: function (form) {
         var entity = Object.fromEntries((new FormData(form)).entries());
         $.ajax({
-          url: 'login',
+          url: 'src/login',
           type: 'POST',
           data: JSON.stringify(entity),
           contentType: "application/json",
@@ -79,7 +79,7 @@ var UserService = {
       submitHandler: function (form) {
         var entity = Object.fromEntries((new FormData(form)).entries());
         $.ajax({
-          url: 'register',
+          url: 'src/register',
           type: 'POST',
           data: JSON.stringify(entity),
           contentType: "application/json",
@@ -91,8 +91,8 @@ var UserService = {
             UserService.user();
             console.log("ha?")
           },
-          error: function (response) {
-            console.log(response);
+          error: function (XMLHttpRequest, response) {
+            console.log(XMLHttpRequest);
           }
         });
 

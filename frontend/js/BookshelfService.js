@@ -7,7 +7,7 @@ var BookshelfService = {
     var payload = UserService.parseJWT(localStorage.getItem("token"));
     // console.log(payload);
     $.ajax({
-      url: 'bookshelf/user/' + payload.iduser,
+      url: 'src/bookshelf/user/' + payload.iduser,
       type: 'GET',
       beforeSend: function (xhr) {
         xhr.setRequestHeader('Authorization', localStorage.getItem('token'))
@@ -53,7 +53,7 @@ var BookshelfService = {
   getBooks: function (idbookshelf) {
     var payload = UserService.parseJWT(localStorage.getItem("token"));
     $.ajax({
-      url: 'bookshelf/books/' + idbookshelf,
+      url: 'src/bookshelf/books/' + idbookshelf,
       type: 'GET',
       contentType: 'application/json',
       dataType: 'json',
@@ -176,7 +176,7 @@ var BookshelfService = {
       submitHandler: function (form) {
         var data = Object.fromEntries((new FormData(form)).entries());
         $.ajax({
-          url: 'bookshelf',
+          url: 'src/bookshelf',
           type: 'POST',
           data: JSON.stringify(data),
           contentType: 'application/json',
@@ -190,6 +190,7 @@ var BookshelfService = {
           },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(errorThrown);
+            console.log(XMLHttpRequest);
           }
         })
       }
@@ -200,7 +201,7 @@ var BookshelfService = {
     var payload = UserService.parseJWT(localStorage.getItem("token"));
     $.ajax({
 
-      url: 'bookshelf/' + idbookshelf,
+      url: 'src/bookshelf/' + idbookshelf,
       type: 'GET',
       contentType: 'application/json',
       dataType: 'json',
@@ -288,7 +289,7 @@ var BookshelfService = {
         var data = Object.fromEntries((new FormData(form)).entries());
         data.user_id = payload.iduser;
         $.ajax({
-          url: 'bookshelf/' + idbookshelf,
+          url: 'src/bookshelf/' + idbookshelf,
           type: 'PUT',
           data: JSON.stringify(data),
           contentType: 'application/json',
