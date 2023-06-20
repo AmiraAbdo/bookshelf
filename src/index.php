@@ -13,7 +13,6 @@ require_once './services/BaseService.class.php';
 require_once './services/BookService.class.php';
 require_once './services/BookshelfService.class.php';
 require_once './services/UserService.class.php';
-require_once '../config.php';
 
 // Flight::route('/', function () {
 //     echo 'hello world!';
