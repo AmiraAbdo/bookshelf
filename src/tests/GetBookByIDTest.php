@@ -6,7 +6,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
-class Test1 extends TestCase {
+class GetBookByIDTest extends TestCase {
 
     protected $client;
 
