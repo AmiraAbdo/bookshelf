@@ -1,5 +1,6 @@
 {
     "name": "rani/bookshelf",
+    "description": "CEN 308 - bookshelf project for Software Engineering",
     "autoload": {
         "psr-4": {
             "Rani\\Bookshelf\\": "src/"
