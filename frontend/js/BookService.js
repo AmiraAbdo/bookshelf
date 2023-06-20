@@ -250,6 +250,9 @@ var BookService = {
         } else if (data.NYT_bestseller == 0) {
           NYT = "";
         }
+        if(data.img === null){
+          data.img = 'qm.png';
+        }
         var html = `
         <div class="card rounded-3 text-black">
           <div class="row p-4">
@@ -293,7 +296,6 @@ var BookService = {
             <div class="col-2 m-4 my-5">
               <p id="nyt">`+ NYT + `</p>
               <p>`+ data.genre + `</p>
-              <p>`+ data.progress + `</p>
             </div>
           </div>
         </div>
@@ -440,26 +442,7 @@ var BookService = {
                                   </script>
                                 </div>
                               </div>
-                              <div class="text-start my-4">
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="progress" id="read">
-                                  <label class="form-check-label" for="read">
-                                    Read
-                                  </label>
-                                </div>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="progress" id="reading">
-                                  <label class="form-check-label" for="reading">
-                                    Reading
-                                  </label>
-                                </div>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="progress" id="unread" checked>
-                                  <label class="form-check-label" for="unread">
-                                  Unread
-                                  </label>
-                                </div>
-                              </div>
+                              
                               <button
                                 class="btn btn-danger my-2 py-3 px-4"
                                 onclick="BookService.list()"
