@@ -20,11 +20,24 @@ class BookshelfDao extends BaseDao
 
     public function getBooks($idbookshelf)
     {
-        $query = "SELECT b.title, b.author, b.genre, b.year, b.synopsis, b.NYT_bestseller, b.created_by, b.idbook from book b
+        $query = "SELECT b.title, b.author, b.genre, b.year, b.synopsis, b.NYT_bestseller, b.created_by, b.idbook, b.img from book b
         JOIN book_bookshelf bb ON bb.book_id = b.idbook
         JOIN  bookshelf b2 ON b2.idbookshelf = bb.bookshelf_id
         WHERE b2.idbookshelf = :idbookshelf
         GROUP BY (b.idbook);";
         return $this->queryParams($query, ['idbookshelf' => $idbookshelf]);
     }
+
+    public function getByUserId($iduser)
+    {
+        $query = "SELECT * FROM bookshelf b WHERE user_id = :iduser";
+        return $this->queryParams($query, ['iduser' => $iduser]);
+    }
+
+    public function addBookToShelf($idbook, $idbookshelf)
+    {
+        $query = "INSERT INTO book_bookshelf (book_id, bookshelf_id) VALUES (:idbook, :idbookshelf);";
+        return $this->queryParams($query, ['idbook' => $idbook, 'idbookshelf' => $idbookshelf]);
+    }
+
 }

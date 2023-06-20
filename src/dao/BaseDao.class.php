@@ -3,7 +3,8 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require_once 'src/Database.php';
+
+require_once './Database.php';
 
 class BaseDao
 {
@@ -85,5 +86,11 @@ class BaseDao
         $stmt = $this->conn->prepare("DELETE FROM " . $this->table . " WHERE id" . $this->table . "=:id");
         $stmt->bindParam(':id', $id); // SQL injection prevention
         $stmt->execute();
+    }
+
+    public function oneRow($query, $params)
+    {
+        $stmt = $this->queryParams($query, $params);
+        return reset($stmt);
     }
 }

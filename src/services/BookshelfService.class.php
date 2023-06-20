@@ -4,8 +4,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once __DIR__.'/BaseService.class.php';
-require_once __DIR__.'/../dao/BookshelfDao.class.php';
+require_once __DIR__ . '/BaseService.class.php';
+require_once __DIR__ . '/../dao/BookshelfDao.class.php';
 
 
 class BookshelfService extends BaseService
@@ -23,5 +23,25 @@ class BookshelfService extends BaseService
     public function getBooks($bookshelf_id)
     {
         return $this->dao->getBooks($bookshelf_id);
+    }
+
+    public function getByUserId($user_id)
+    {
+        return $this->dao->getByUserId($user_id);
+    }
+
+    public function addBookToShelf($idbook, $idbookshelf)
+    {
+        return $this->dao->addBookToShelf($idbook, $idbookshelf);
+    }
+
+    public function updateBooksInShelf($idbook, $idbookshelf)
+    {
+        return $this->dao->updateBooksInShelf($idbook, $idbookshelf);
+    }
+
+    public function deleteBooksFromShelf($idbook, $idbookshelf)
+    {
+        return $this->dao->deleteBooksFromShelf($idbook, $idbookshelf);
     }
 }
