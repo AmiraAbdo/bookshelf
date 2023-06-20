@@ -28,7 +28,7 @@ Flight::route('POST /login', function () {
     if ($user != null) {
         if ($user['password'] == md5($data['password'])) {
             // Flight::json("yay");
-            $jwt = JWT::encode($user, JWT_SECRET, 'HS256');
+            $jwt = JWT::encode($user, getenv('JWT_SECRET'), 'HS256');
             Flight::json(['token' => $jwt]);
         } else {
             Flight::json(["message" => "wrong password"]);
@@ -45,7 +45,7 @@ Flight::route('POST /register', function () {
         // $test = Flight::userService()->add($newUser);
         $newUser           = Flight::userService()->add($newUser);
         $newUser['iduser'] = $newUser['id'];
-        $jwt               = JWT::encode($newUser, JWT_SECRET, 'HS256');
+        $jwt               = JWT::encode($newUser, getenv('JWT_SECRET'), 'HS256');
         Flight::json(['token' => $jwt]);
     }
 });
