@@ -1,5 +1,6 @@
 {
     "name": "rani/bookshelf",
+    "description": "CEN 308 - bookshelf project for Software Engineering",
     "autoload": {
         "psr-4": {
             "Rani\\Bookshelf\\": "src/"
@@ -9,13 +10,19 @@
         {
             "name": "rania-w",
             "email": "rania.weiss@stu.ibu.edu.ba"
+        },
+        {
+            "name": "amira",
+            "email": "amira.abdo@stu.ibu.edu.ba"
         }
     ],
     "require": {
         "mikecao/flight": "^2.0",
         "firebase/php-jwt": "^6.5"
+        "guzzlehttp/guzzle": "^7.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.16"
+        "friendsofphp/php-cs-fixer": "^3.16",
+        "phpunit/phpunit": "^9"
     }
 }
