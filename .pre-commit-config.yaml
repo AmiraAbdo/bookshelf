@@ -9,8 +9,20 @@ repos:
         pass_filenames: false
 
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 'v4.4.0'  # Use the sha / tag you want to point at
+    rev: 'v4.4.0'
     hooks:
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
     -   id: double-quote-string-fixer
+
+
+# Standard JS - https://standardjs.com is a
+# JavaScript style guide, linter, and formatter
+# This hook runs Standard, producing warnings as well as fixing the things it can fix on its own
+# We won't be using it right now since we've added it too late and too much of the (working) code would need to be changed.
+
+# -   repo: https://github.com/standard/standard
+#     rev: 'v17.1.0'
+#     hooks:
+#     -   id: standard
+#         args: [--fix]
