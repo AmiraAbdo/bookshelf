@@ -142,7 +142,7 @@ var BookService = {
                                     document.getElementById("genre-sel");
                                   const inputElement =
                                     document.getElementById("genre-in");
-    
+
                                   selectElement.addEventListener(
                                     "change",
                                     function () {
@@ -168,7 +168,7 @@ var BookService = {
                                         const switchState = switchElement.checked;
                                         console.log('Switch state:', switchState);
                                     });
-                                  
+
                                   </script>
                                 </div>
                               </div>
@@ -412,7 +412,7 @@ var BookService = {
                                     document.getElementById("genre-sel");
                                   const inputElement =
                                     document.getElementById("genre-in");
-    
+
                                   selectElement.addEventListener(
                                     "change",
                                     function () {
@@ -436,13 +436,13 @@ var BookService = {
                                     const switchElement = document.getElementById('nyt');
                                     switchElement.addEventListener('change', function() {
                                         const switchState = switchElement.checked;
-                                        
+
                                     });
-                                  
+
                                   </script>
                                 </div>
                               </div>
-                              
+
                               <button
                                 class="btn btn-danger my-2 py-3 px-4"
                                 onclick="BookService.list()"

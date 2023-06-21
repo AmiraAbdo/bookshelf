@@ -6,11 +6,12 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
-class AddBookshelfTest extends TestCase {
-
+class AddBookshelfTest extends TestCase
+{
     protected $client;
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $mock = new MockHandler([
             new Response(200, [], json_encode(['name' => 'MyNewBookshelf', 'description' => 'This is my new bookshelf.', 'user_id' => '18', 'id' => 'some_id_value' ])),
         ]);
@@ -19,7 +20,8 @@ class AddBookshelfTest extends TestCase {
         $this->client = new Client(['handler' => $handlerStack]);
     }
 
-    public function testPostBookshelfEndpoint() {
+    public function testPostBookshelfEndpoint()
+    {
         $data = [
             'name' => 'MyNewBookshelf',
             'description' => 'This is my new bookshelf.'

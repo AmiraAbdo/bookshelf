@@ -67,7 +67,7 @@ var BookshelfService = {
         for (let i = 0; i < data.length; i++) {
           html += `
                     <!--krene kartica-->
-                    
+
                     <div class="col">
                         <div class="card shadow-sm" style="height:100%">
                             <img src="frontend/assets/`+ data[i].img + `" ></img>

@@ -6,22 +6,23 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
-class GetBookByIDTest extends TestCase {
-
+class GetBookByIDTest extends TestCase
+{
     protected $client;
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $mock = new MockHandler([
-            new Response(200, [], json_encode( [
-                "idbook" => 1, 
-                "title" => "romeo and juliet", 
-                "author" => "william shakespeare", 
-                "genre" => "drama", 
-                "year" => 1600, 
-                "synopsis" => "a tragic story of two star-crossed lovers", 
-                "NYT_bestseller" => 0, 
-                "created_by" => 2, 
-                "img" => "romeojuliet.jpg" 
+            new Response(200, [], json_encode([
+                "idbook" => 1,
+                "title" => "romeo and juliet",
+                "author" => "william shakespeare",
+                "genre" => "drama",
+                "year" => 1600,
+                "synopsis" => "a tragic story of two star-crossed lovers",
+                "NYT_bestseller" => 0,
+                "created_by" => 2,
+                "img" => "romeojuliet.jpg"
              ])),
         ]);
 
@@ -29,7 +30,8 @@ class GetBookByIDTest extends TestCase {
         $this->client = new Client(['handler' => $handlerStack]);
     }
 
-    public function testGetBookEndpoint() {
+    public function testGetBookEndpoint()
+    {
         $response = $this->client->get('/book/1');
 
         $this->assertEquals(200, $response->getStatusCode());

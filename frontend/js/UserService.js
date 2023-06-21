@@ -70,7 +70,7 @@ var UserService = {
           </div>
         </div>
       </div>
-    
+
       `;
     $("#login").html(html);
   },
@@ -142,7 +142,7 @@ var UserService = {
           </div>
         </div>
       </div>
-    
+
       `;
     $("#register").html(html);
   },

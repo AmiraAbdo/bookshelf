@@ -6,7 +6,7 @@ var SPApp = {
          */
         elements = ["#book-list", "#bookshelf-list", "#bookshelf-book-list", "#login", "#register", "#start", "#add-shelf", "#add-book", "#edit-shelf", "#book", "#edit-book"];
         $(elements.join(", ")).attr('hidden', true);
-        
+
         $(spotlight_element).attr('hidden',false);
         $(spotlight_element).html("");
     }
